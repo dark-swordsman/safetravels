@@ -14,7 +14,7 @@ const appPort = process.env.PORT || config.port;
  */
 
 let source; // files to read
-let backendMode = false; // enable backend files
+let backendMode = true; // enable backend files
 
 if(backendMode === true){
     source = './backend-test';
@@ -145,6 +145,26 @@ function getTrip(lat, long, response){
 
 }
 
+function getCrime(lat, long, response){
+
+    request({
+        url: 'https://crimescore.p.mashape.com/crimescore?f=json&id=174&lat=' + lat + '&lon=' + long,
+        headers: {
+            "X-Mashape-Key": "uYOcVPyZbtmshomkllSYsarwvGOsp1T7xdyjsn31sh6yorUtyB",
+            "Accept": "application/json"
+        }
+    }, function(err, res, body){
+        response.setHeader('Content-Type', 'application/json');
+        response.setHeader('Access-Control-Allow-Origin', '*');
+        response.setHeader('datatype', 'crime');
+        response.send(JSON.stringify(body));
+        response.end();
+
+        console.log('hotels sent');
+    });
+
+}
+
 /***************************************
  * App other stuff
  */
@@ -160,6 +180,11 @@ app.post('/getTrip', function(req, res){
     getTrip(lat, long, res);
 });
 
+app.post('/getCrime', function(req, res){
+    let lat = req.body.lat;
+    let long = req.body.long;
+    getCrime(lat, long, res);
+});
 
 
 // authentication stuff can go below this
