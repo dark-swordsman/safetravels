@@ -14,7 +14,7 @@ const appPort = process.env.PORT || config.port;
  */
 
 let source; // files to read
-let backendMode = false; // enable backend files
+let backendMode = true; // enable backend files
 
 if(backendMode === true){
     source = './backend-test';
@@ -41,7 +41,7 @@ process.on('SIGINT', function() {
 function getEvents(eventName, response){
     let x = 0;
     eventName = eventName.toLowerCase();
-
+    // EVENT BRITE KEY
     const token = 'BWNZ64GURPVF7K5MWG3M';
 
     request('https://www.eventbriteapi.com/v3/events/search/?q=' + eventName + '&token=' + token, function(err, res, body){
@@ -114,6 +114,7 @@ function getEvents(eventName, response){
                 if(x === eventCap){
                     response.setHeader('Content-Type', 'application/json');
                     response.setHeader('Access-Control-Allow-Origin', '*');
+                    response.setHeader('datatype', 'events');
                     response.send(JSON.stringify({ events }));
                     response.end();
         
@@ -128,6 +129,22 @@ function getEvents(eventName, response){
     });
 }
 
+function getTrip(lat, long, response){
+    // http://api.tripadvisor.com/api/partner/2.0/map/42.33141,-71.099396/hotels?key=636970dc-6712-4e9a-a641-d5d77deffef5
+    let token = '636970dc-6712-4e9a-a641-d5d77deffef5';
+
+    request('http://api.tripadvisor.com/api/partner/2.0/map/' + lat + ',' + long + '/hotels?key=' + token, function(err, res, body){
+        response.setHeader('Content-Type', 'application/json');
+        response.setHeader('Access-Control-Allow-Origin', '*');
+        response.setHeader('datatype', 'trip');
+        response.send(JSON.stringify(body));
+        response.end();
+
+        console.log('hotels sent');
+    });
+
+}
+
 /***************************************
  * App other stuff
  */
@@ -135,6 +152,12 @@ function getEvents(eventName, response){
 app.post('/getEvents', function(req, res){
     let eventNameRequest = req.body.eventName;
     getEvents(eventNameRequest, res);
+});
+
+app.post('/getTrip', function(req, res){
+    let lat = req.body.lat;
+    let long = req.body.long;
+    getTrip(lat, long, res);
 });
 
 
