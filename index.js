@@ -3,6 +3,7 @@ const app = express();
 const request = require('request'); 
 const bodyParser = require('body-parser');
 const async = require('async');
+const fs = require('fs');
 
 const config = require('./config')(process.env.NODE_ENV);
 const appPort = process.env.PORT || config.port;
@@ -13,7 +14,7 @@ const appPort = process.env.PORT || config.port;
  */
 
 let source; // files to read
-let backendMode = false; // enable backend files
+let backendMode = true; // enable backend files
 
 if(backendMode === true){
     source = './backend-test';
@@ -36,24 +37,42 @@ process.on('SIGINT', function() {
  * Functions
  */
 
+
 function getEvents(eventName, response){
+    let x = 0;
     eventName = eventName.toLowerCase();
 
-    request('https://www.eventbriteapi.com/v3/events/search/?q=' + eventName + '&token=TOT2UEOZ2ZSLW5LM37FN', function(err, res, body){
+    const token = 'BWNZ64GURPVF7K5MWG3M';
+
+    request('https://www.eventbriteapi.com/v3/events/search/?q=' + eventName + '&token=' + token, function(err, res, body){
 
         let eventsTemp = JSON.parse(res.body).events;
         let events = [];
-        let x = 0;
 
-        for(var j = 0; j < eventsTemp.length; j++){
+        let eventCap;
+
+        if(eventsTemp.length <= 20){
+            eventCap = eventsTemp.length;
+        } else {
+            eventCap = 20;
+        }
+
+        for(var j = 0; j < eventCap; j++){
+            let venuesLocal = require('./venues.json');
+
             let i = j;
             let eT = eventsTemp[i];
+            let venueID = eT.venue_id;
+
             let lat;
             let long;
             let city;
             let region;
             let country;
-            request('https://www.eventbriteapi.com/v3/venues/' + eT.venue_id + '/?token=TOT2UEOZ2ZSLW5LM37FN', function(err, res, body){
+            let logo;
+
+            // function 
+            request('https://www.eventbriteapi.com/v3/venues/' + venueID + '/?token=' + token, function(err, res, body){
                 let locationResponse = JSON.parse(body);
 
                 if(locationResponse.address != null){
@@ -62,8 +81,12 @@ function getEvents(eventName, response){
                     city = locationResponse.address.city;
                     region = locationResponse.address.region;
                     country = locationResponse.address.country;
+                    if(eventsTemp[i].logo == null){
+                        logo = null;
+                    } else {
+                        logo = eventsTemp[i].logo.original.url;
+                    }
 
-            
                     if(err){
                         console.error(err.message);
                     }
@@ -80,30 +103,30 @@ function getEvents(eventName, response){
                             city: city,
                             region: region,
                             country: country
-                        }
+                        },
+                        logo: logo
                     }
 
                     x++;
-
-                    if(x === events.length){
-                        response.setHeader('Content-Type', 'application/json');
-                        response.setHeader('Access-Control-Allow-Origin', '*');
-                        response.send(JSON.stringify({ events }));
-                        response.end();
-            
-                        console.log('events sent');
-                    }
                 }else{
                     x++;
-                }  
-            });   
+                } 
+                
+                if(x === eventCap){
+                    response.setHeader('Content-Type', 'application/json');
+                    response.setHeader('Access-Control-Allow-Origin', '*');
+                    response.send(JSON.stringify({ events }));
+                    response.end();
+        
+                    console.log('events sent');
+                }
+            });
         }
 
         if(err){
             console.error(err.message);
         }
     });
-
 }
 
 /***************************************
