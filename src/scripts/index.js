@@ -11,47 +11,56 @@ function sendEventName(eventName){
     http.setRequestHeader('Content-Type', 'application/json');
     http.setRequestHeader('Access-Control-Allow-Origin', '*');
     http.send(JSON.stringify(data));
-}
+};
+
+var currentStoredValue = sessionStorage.getItem('input');
+function getEvents(){
+    
+    sendEventName(currentStoredValue);
+    sessionStorage.clear();
+};
 
 button.onclick = function(){
-    sendEventName(name.value);
-    console.log("working?");
+    
+    
+    var indexinput = name.value;
+    
+    
+    
+        if (window.location.pathname === "/index.html"){
+            sessionStorage.setItem('input', indexinput);
+            console.log("you're at home!");
+            
+            console.log(sessionStorage.getItem('input'))
+            document.location.href = "/results.html"
+        
+           
+            
+      
+        }
+        else if (window.location.pathname === "/results.html") {
+            used = document.getElementById("test");
+            used.innerHTML = "";
+            sendEventName(indexinput);
+            
+        }
+
     
 }
 
-//**HomePage**/
-if (window.location.pathname === "/index.html"){
-    button.onclick = function(){
-        
-        var indexinput = name.value;
-        console.log(indexinput);
-        
-    }
-    console.log(name.value);
-    
-    // http.onreadystatechange = function() {
-    //     function results(){
-    //     if (this.readyState == 4 && this.status == 200) {
-    //       const response = this.response;
-    //       var allEvents = JSON.parse(response).events;
-    //       console.log(allEvents);
-        
-    //         }
-    //     }
-    // }
-}
 
-//**ResultsPage **/
-else {
-http.onreadystatechange = function() {
+
+    
+    
+    http.onreadystatechange = function() {
     
     if (this.readyState == 4 && this.status == 200) {
+        
       const response = this.response;
       var allEvents = JSON.parse(response).events;
     
       console.log(allEvents.length)
-      var used = document.getElementById("test");
-      used.innerHTML = "";
+      
 
     var description = "";
 
@@ -118,7 +127,7 @@ http.onreadystatechange = function() {
     }
  
   }
-}
+
 
 /**<div class="resultsContent1">
             <input id="maininput" placeholder="Tell us here." size=10> <button id="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
