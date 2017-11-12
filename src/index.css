@@ -141,7 +141,7 @@ li a:hover {
     font-size: 30px;
     padding-top: 20px;
     text-align: left;
-    padding-left: 20px;
+    padding-left: 320px;
 }
 
 
@@ -159,4 +159,42 @@ li a:hover {
     margin-left: 10%;
     color: black;
     font-family: 'Roboto', sans-serif;
+}
+
+span {
+    text-align: right;
+    font-size: 15px;
+    padding-right:10px;
+}
+
+.wrapper {
+
+    
+}
+
+.uniqueLogos {
+    height: 150px;
+    width: 300px;
+    float: left;
+}
+
+#tripIcon {
+    height: 50px;
+    width: 50px;
+}
+
+#tripButton {
+   
+    background:transparent; 
+    border:none;
+    color:transparent;
+
+}
+
+.tripText {
+    color:black;
+    float:right;
+    padding-right: 400px;
+    font-size: 20px;
+    font-family: Roboto; Sans-serif;
 }

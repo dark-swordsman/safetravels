@@ -70,28 +70,56 @@ button.onclick = function(){
       for (i = 0; i < allEvents.length; i++) {
           eventNameActual = allEvents[i].name;
           description = allEvents[i].desc;
+          regionalName = allEvents[i].address.city + "," + allEvents[i].address.country;
+          logoURL = allEvents[i].logo
 
           if(description.length > 250){
               description = description.substring(0,250);
               description += "..."
           }
-
+          var wrapper = document.createElement("div");
+          var logo = document.createElement("img");
           var parent = document.getElementById("test");
           var uniqueChild = document.createElement("div");
           var uniqueName = document.createElement("p");
+          var regionalChild = document.createElement("span");
+          var regionalName = document.createTextNode(regionalName);
           var eventName = document.createTextNode(eventNameActual);
+          var button = document.createElement("button");
+          var tripImage = document.createElement("img");
+          var tripText = document.createElement("p");
+          var tripTextNode = document.createTextNode("Book safe hotels via TripAdvisor");
+          tripImage.src = "images/tripadvisor.png" ;
+          wrapper.appendChild(logo);
+          uniqueChild.appendChild(wrapper);
+          regionalChild.appendChild(regionalName);
           uniqueName.appendChild(eventName);
           uniqueName.className = "eventName";
-          uniqueChild.appendChild(uniqueName);
+          uniqueName.appendChild(regionalChild);
+          wrapper.appendChild(uniqueName);
+          logo.src = logoURL
+          logo.className = "uniqueLogos";
+          button.className = "tripIcons" ;
+          tripImage.id = "tripIcon";
+          button.id = "tripButton";
+          tripText.className = "tripText";
+          tripText.appendChild(tripTextNode);
+          
+          
+          
+
+//           //**<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+//   //**<i class="material-icons">add</i>
+//   </button> 
 
           var line = document.createElement("hr");
-          uniqueChild.appendChild(line);
 
-          var descriptioncontain = document.createElement("p");
-          var descriptiontext = document.createTextNode(description);
-          descriptioncontain.appendChild(descriptiontext);
-          descriptioncontain.className = "description";
-          uniqueChild.appendChild(descriptioncontain);
+          wrapper.appendChild(line);
+          button.appendChild(tripImage);
+          wrapper.appendChild(button);
+          wrapper.appendChild(tripText);
+
+         
 
           uniqueChild.className = "dynamicContent";
           
