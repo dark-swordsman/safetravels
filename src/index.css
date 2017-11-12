@@ -184,6 +184,7 @@ span {
 #tripIcon {
     height: 50px;
     width: 50px;
+    cursor: pointer;
 }
 
 #tripButton {
@@ -204,4 +205,30 @@ span {
 
 .hiddenVariable {
     display: none;
+}
+
+#about {
+    color:black;
+    font-size: 20px;
+}
+
+.aboutwrap {
+    text-align: left;
+    width: 500px;
+    margin-left: 15%;
+    margin-top: 20px;
+    font
+}
+
+.resultscontent2{
+    text-align: center;
+}
+
+p {
+    color:white;
+    font-family: roboto;
+}
+
+#about {
+    color:black;
 }
