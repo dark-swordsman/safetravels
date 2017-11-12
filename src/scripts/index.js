@@ -134,57 +134,7 @@ function sendEventDetails(lat, long){
   //   //**<i class="material-icons">add</i>
   //   </button> 
   
-            var line = document.createElement("hr");
-  
-            wrapper.appendChild(line);
-            button.appendChild(tripImage);
-            wrapper.appendChild(button);
-            wrapper.appendChild(tripText);
-  
-           
-  
-            uniqueChild.className = "dynamicContent";
-            
-            parent.appendChild(uniqueChild);
-  
-  
-          }
-
-          var wrapper = document.createElement("div");
-          var logo = document.createElement("img");
-          var parent = document.getElementById("test");
-          var uniqueChild = document.createElement("div");
-          var uniqueName = document.createElement("p");
-          var regionalChild = document.createElement("span");
-          var regionalName = document.createTextNode(regionalName);
-          var eventName = document.createTextNode(eventNameActual);
-          var button = document.createElement("button");
-          var tripImage = document.createElement("img");
-          var tripText = document.createElement("p");
-          var tripTextNode = document.createTextNode("Safe Hotels, an Owl-click away.");
-         
-          tripImage.src = "images/tripadvisor.png" ;
-          wrapper.appendChild(logo);
-          uniqueChild.appendChild(wrapper);
-          regionalChild.appendChild(regionalName);
-          uniqueName.appendChild(eventName);
-          uniqueName.className = "eventName";
-          uniqueName.appendChild(regionalChild);
-          wrapper.appendChild(uniqueName);
-          logo.src = logoURL
-          logo.className = "uniqueLogos";
-          button.className = "tripIcons" ;
-          tripImage.id = "tripIcon";
-          button.id = "tripButton";
-          tripText.className = "tripText";
-          tripText.appendChild(tripTextNode);
-          button.onclick = function() {
-                sendEventDetails(latitude,long);
-           }
-
-          
-          
-          
+        
 
 //           //**<button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
 //   //**<i class="material-icons">add</i>
