@@ -89,15 +89,18 @@ li a:hover {
     width: 100%;
     height:1000px;
     overflow: default;
-    background-color: blue;
-    position: absolute;
+    background-color: rgb(255, 255, 255);
     text-align: center;
+    padding-top: 7%;
 }
 
-.dynamicContent{
-    background-color: purple;
+.resultsContent1 > .dynamicContent{
+    background-color: rgb(221, 220, 220);
     text-align: center;
-    width: 400px;
+    width: 80%;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 10px;
     
 }
 
