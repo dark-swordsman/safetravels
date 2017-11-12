@@ -23,6 +23,9 @@
    
 }
 
+.tellus {
+    width: 100%;
+}
 .second {
     width: 100%;
     height:400px;
@@ -40,6 +43,7 @@ p {
 
 #logo {
     height: 100%;
+    margin-left: 10px;
 }
 
 ul {
@@ -100,6 +104,7 @@ li a:hover {
     border-bottom: 1px solid #DDD;
     box-shadow: inset 0 1px 2px rgba(0,0,0,.39), 0 -1px 1px #FFF, 0 1px 0 #FFF;
     margin-right:10px;
+    padding-left: 10px;
     
 }
 
@@ -144,4 +149,5 @@ li a:hover {
     color: black;
     text-align: left;
     padding-left: 20px;
+    float: right;
 }
