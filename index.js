@@ -14,7 +14,7 @@ const appPort = process.env.PORT || config.port;
  */
 
 let source; // files to read
-let backendMode = true; // enable backend files
+let backendMode = false; // enable backend files
 
 if(backendMode === true){
     source = './backend-test';
