@@ -5,6 +5,12 @@
 
 }
 
+.topwrap2{
+    width: 100%;
+    height: 100px;
+    background-color:rgb(255, 255, 255);
+}
+
 .slider {
     width: 100%;
     height:400px;
@@ -41,6 +47,10 @@ ul {
     background-color: rgb(0, 0, 0);;
     float: right;
     font-family: Roboto;
+}
+
+#ul2 {
+    background-color: white;
 }
 
 li {
@@ -95,12 +105,12 @@ li a:hover {
 }
 
 .resultsContent1 > .dynamicContent{
-    background-color: rgb(221, 220, 220);
-    text-align: center;
+    background-color: rgb(221, 221, 221);
     width: 80%;
     height: 150px;
     margin: 0 auto;
-    margin-top: 10px;
+    margin-top: 20px;
+    box-shadow: 6px 6px 5px #888888;
     
 }
 
