@@ -72,6 +72,11 @@ li a:hover {
     
 }
 
+#active {
+    border-bottom:3px solid;
+    border-bottom-color: rgb(49, 89, 221);;
+}
+
 .centerstage {
     text-align: center;
     color: white;
