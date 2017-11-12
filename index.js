@@ -58,7 +58,6 @@ function getEvents(eventName, response){
         }
 
         for(var j = 0; j < eventCap; j++){
-            let venuesLocal = require('./venues.json');
 
             let i = j;
             let eT = eventsTemp[i];
@@ -129,6 +128,10 @@ function getEvents(eventName, response){
     });
 }
 
+function getTrip(lat, long, response){
+
+}
+
 /***************************************
  * App other stuff
  */
@@ -136,6 +139,12 @@ function getEvents(eventName, response){
 app.post('/getEvents', function(req, res){
     let eventNameRequest = req.body.eventName;
     getEvents(eventNameRequest, res);
+});
+
+app.post('./getTrip', function(req, res){
+    let lat = req.body.lat;
+    let long = req.body.long;
+    getTrip(lat, long, res);
 });
 
 
