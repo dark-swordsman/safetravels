@@ -58,7 +58,6 @@ function getEvents(eventName, response){
         }
 
         for(var j = 0; j < eventCap; j++){
-            let venuesLocal = require('./venues.json');
 
             let i = j;
             let eT = eventsTemp[i];
