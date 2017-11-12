@@ -50,7 +50,16 @@ button.onclick = function(){
     
 }
 
-
+function sendEventDetails(lat, long){
+    http.open('post', '/getTrip', true);
+    data = {
+        lat: lat,
+        long: long
+    };
+    http.setRequestHeader('Content-Type', 'application/json');
+    http.setRequestHeader('Access-Control-Allow-Origin', '*');
+    http.send(JSON.stringify(data));
+}
 
     
     
@@ -72,6 +81,8 @@ button.onclick = function(){
           description = allEvents[i].desc;
           regionalName = allEvents[i].address.city + "," + allEvents[i].address.country;
           logoURL = allEvents[i].logo
+          latitude = allEvents[i].lat;
+          long = allEvents[i].long;
 
           if(description.length > 250){
               description = description.substring(0,250);
@@ -89,6 +100,7 @@ button.onclick = function(){
           var tripImage = document.createElement("img");
           var tripText = document.createElement("p");
           var tripTextNode = document.createTextNode("Book safe hotels via TripAdvisor");
+         
           tripImage.src = "images/tripadvisor.png" ;
           wrapper.appendChild(logo);
           uniqueChild.appendChild(wrapper);
@@ -104,6 +116,10 @@ button.onclick = function(){
           button.id = "tripButton";
           tripText.className = "tripText";
           tripText.appendChild(tripTextNode);
+          button.onclick = function() {
+                sendEventDetails(latitude,long);
+           }
+
           
           
           
