@@ -70,7 +70,7 @@ function sendEventDetails(lat, long){
       const response = this.response;
       var allEvents = JSON.parse(response).events;
       var numberOfEvents = allEvents.length;
-      document.getElementById("resultNumber").innerHTML = "SHOWING" + " " + numberOfEvents + " " + "EVENTS..."
+      document.getElementById("resultNumber").innerHTML = "SHOWING" + " " + numberOfEvents + " " + "EVENTS...";
       console.log(allEvents);
       
 
@@ -99,7 +99,7 @@ function sendEventDetails(lat, long){
           var button = document.createElement("button");
           var tripImage = document.createElement("img");
           var tripText = document.createElement("p");
-          var tripTextNode = document.createTextNode("Book safe hotels via TripAdvisor");
+          var tripTextNode = document.createTextNode("Safe Hotels, an Owl-click away.");
          
           tripImage.src = "images/tripadvisor.png" ;
           wrapper.appendChild(logo);
@@ -174,6 +174,7 @@ function sendEventDetails(lat, long){
     }
  
   }
+
 
 
 /**<div class="resultsContent1">
