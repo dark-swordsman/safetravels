@@ -1,3 +1,5 @@
+
+
 let name = document.getElementById('maininput');
 let button = document.getElementById('submit');
 
@@ -58,8 +60,9 @@ button.onclick = function(){
         
       const response = this.response;
       var allEvents = JSON.parse(response).events;
-    
-      console.log(allEvents.length)
+      var numberOfEvents = allEvents.length;
+      document.getElementById("resultNumber").innerHTML = "SHOWING" + " " + numberOfEvents + " " + "EVENTS..."
+      console.log(allEvents);
       
 
     var description = "";
